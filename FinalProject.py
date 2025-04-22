@@ -2,79 +2,72 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-URL = 'https://raw.githubusercontent.com/zachjf9/finalProjectDSC205/refs/heads/main/cbb.csv'
-df = pd.read_csv(URL)
-
+df = pd.read_csv('https://raw.githubusercontent.com/zachjf9/finalProjectDSC205/refs/heads/main/cbb.csv')
 duke_df = df[(df['TEAM'] == 'Duke') & (df['YEAR'] >= 2014)]
 
-st.title("Duke's Performance Over the Last Decade - Zach, Trevor, Lisbel")
+st.title("Duke Men's Basketball Performance (2014–2024) - Zach, Trevor, Lisbel")
 
-selectAViz = st.selectbox("Choose a plot:", [
+option = st.selectbox("Choose a plot:", [
     "Overall Season Performance",
     "Tournament Performance",
     "Offensive Rating",
     "Defensive Rating",
-    "Duke vs UNC",
+    "Duke vs UNC"
 ])
 
-# 1 overall season performance
+# 1 season performance
 
-if selectAViz == "Overall Season Performance":
-    st.subheader("Duke's Overall Season Record (Wins vs Losses)")
+if option == "Overall Season Performance":
     duke_df['Losses'] = duke_df['G'] - duke_df['W']
     fig, ax = plt.subplots()
     ax.bar(duke_df['YEAR'], duke_df['W'], label='Wins')
     ax.bar(duke_df['YEAR'], duke_df['Losses'], bottom=duke_df['W'], label='Losses', color='crimson')
-    ax.set_ylabel("Games")
-    ax.set_xlabel("Year")
-    ax.set_title("Dukes Season Wins and Losses")
+    ax.set(title="Duke's Season Record Over Ten Years", xlabel="Year", ylabel="Games")
     ax.legend()
     st.pyplot(fig)
 
-# 2 tournament performance
+# 2 tourney performance
 
-elif selectAViz == "Tournament Performance":
-    st.subheader("Duke's NCAA Tournament Results")
+elif option == "Tournament Performance":
+    mapping = {
+        'R68': 1, 'R64': 2, 'R32': 3, 'S16': 4,
+        'E8': 5, 'F4': 6, 'Championship Game': 7, 'Champions': 8
+    }
+    tourney = duke_df[duke_df['POSTSEASON'].notna()][['YEAR', 'POSTSEASON']].copy()
+    tourney['Stage'] = tourney['POSTSEASON'].map(mapping)
+    fig, ax = plt.subplots()
+    ax.bar(tourney['YEAR'], tourney['Stage'], color='navy')
+    ax.set(title="Tournament Progression Over Ten Years", xlabel="Year", ylabel="Round Reached")
+    ax.set_yticks(list(mapping.values()))
+    ax.set_yticklabels(list(mapping.keys()))
+    st.pyplot(fig)
 
 # 3 offensive rating
 
-elif selectAViz == "Offensive Rating":
-    st.subheader("Duke's Offensive Efficiency Over Ten Years")
+elif option == "Offensive Rating":
     fig, ax = plt.subplots()
-    ax.scatter(duke_df['YEAR'], duke_df['ADJOE'], color='blue', label='ADJOE')
-    ax.set_ylabel("Offensive Efficiency")
-    ax.set_xlabel("Year")
-    ax.set_title("Duke's Offensive Rating Over Ten Years")
+    ax.scatter(duke_df['YEAR'], duke_df['ADJOE'], color='navy')
+    ax.set(title="Offensive Rating Over Ten Years", xlabel="Year", ylabel="ADJOE")
     st.pyplot(fig)
 
 # 4 defensive rating
 
-elif selectAViz == "Defensive Rating":
-    st.subheader("Duke's Defensive Efficiency Over Ten Years")
+elif option == "Defensive Rating":
     fig, ax = plt.subplots()
-    ax.scatter(duke_df['YEAR'], duke_df['ADJDE'], color='red', label='ADJDE')
-    ax.set_ylabel("Defensive Efficiency")
-    ax.set_xlabel("Year")
-    ax.set_title("Duke's Defensive Rating Over Ten Years")
+    ax.scatter(duke_df['YEAR'], duke_df['ADJDE'], color='navy')
+    ax.set(title="Defensive Rating Over Ten Years", xlabel="Year", ylabel="ADJDE")
     st.pyplot(fig)
 
 # 5 duke vs unc
 
-elif selectAViz == "Duke vs UNC":
-    st.subheader("Duke vs UNC: Regular Season Wins")
+elif option == "Duke vs UNC":
     unc_df = df[(df['TEAM'] == 'North Carolina') & (df['YEAR'] >= 2014)]
-
-    bar_width = 0.2
     years = duke_df['YEAR']
-    x_duke = years - bar_width / 2
-    x_unc = years + bar_width / 2
+    bar_width = 0.3
     fig, ax = plt.subplots()
-    ax.bar(x_duke, duke_df['W'], width=bar_width, label='Duke', color='navy')
-    ax.bar(x_unc, unc_df['W'], width=bar_width, label='UNC', color='lightblue')
-    ax.set_xlabel("Year")
-    ax.set_ylabel("Wins")
-    ax.set_title("Duke vs UNC Over The Last 10 Years")
+    ax.bar(years - bar_width / 2, duke_df['W'], width=bar_width, label='Duke', color='navy')
+    ax.bar(years + bar_width / 2, unc_df['W'], width=bar_width, label='UNC', color='lightblue')
+    ax.set(title="Duke vs UNC Wins Over Ten Years", xlabel="Year", ylabel="Wins")
     ax.set_xticks(years)
-    ax.set_xticklabels(years)
     ax.legend()
     st.pyplot(fig)
