@@ -10,7 +10,7 @@ unc_df = df[(df['TEAM'] == 'North Carolina') & (df['YEAR'] >= 2014)].sort_values
 
 st.title("Duke Men's Basketball Performance Over Ten Years- Zach, Trevor, Lisbel")
 
-# 1
+# 1 season performance
 
 st.header("Overall Season Performance")
 duke_df['Losses'] = duke_df['G'] - duke_df['W']
@@ -21,7 +21,7 @@ ax1.set(title="Duke's Season Record Over Ten Years", xlabel="Year", ylabel="Game
 ax1.legend()
 st.pyplot(fig1)
 
-# 2 - used chatGPT here
+# 2 tournament progression - used chatGPT here
 
 st.header("Tournament Performance")
 mapping = {
@@ -37,7 +37,7 @@ ax2.set_yticks(list(mapping.values()))
 ax2.set_yticklabels(list(mapping.keys()))
 st.pyplot(fig2)
 
-# 3
+# 3 offensive effeciency
 
 st.header("Offensive Rating")
 fig3, ax3 = plt.subplots()
@@ -45,7 +45,7 @@ ax3.scatter(duke_df['YEAR'], duke_df['ADJOE'], color='navy')
 ax3.set(title="Offensive Rating Over Ten Years", xlabel="Year", ylabel="ADJOE")
 st.pyplot(fig3)
 
-# 4
+# 4 defensive effeciency
 
 st.header("Defensive Rating")
 fig4, ax4 = plt.subplots()
@@ -53,7 +53,7 @@ ax4.scatter(duke_df['YEAR'], duke_df['ADJDE'], color='navy')
 ax4.set(title="Defensive Rating Over Ten Years", xlabel="Year", ylabel="ADJDE")
 st.pyplot(fig4)
 
-# 5
+# 5 duke vs unc
 
 st.header("Duke vs UNC")
 years = duke_df['YEAR']
