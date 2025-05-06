@@ -13,7 +13,7 @@ st.title("Why Duke Men's Basketball Has Performed Better Than UNC Over The Last 
 
 # 1 Duke vs UNC offensive effeciency
 
-st.header("Offensive Rating")
+st.header("Duke vs UNC Offensive Rating")
 fig1, ax1 = plt.subplots()
 ax1.scatter(duke_df['YEAR'], duke_df['ADJOE'], color='navy')
 z = np.polyfit(duke_df['YEAR'], duke_df['ADJOE'], 1)
@@ -28,7 +28,7 @@ st.pyplot(fig1)
 
 # 2 Duke vs UNC defensive effeciency
 
-st.header("Defensive Rating")
+st.header("Duke vs UNC Defensive Rating")
 fig2, ax2 = plt.subplots()
 ax2.scatter(duke_df['YEAR'], duke_df['ADJDE'], color='navy')
 z = np.polyfit(duke_df['YEAR'], duke_df['ADJDE'], 1)
@@ -43,7 +43,7 @@ st.pyplot(fig2)
 
 # 3 dukes vs unc overall season performance
 
-st.header("Duke vs UNC")
+st.header("Duke vs UNC Overall Season Performance")
 duke_df['Losses'] = duke_df['G'] - duke_df['W']
 unc_df['Losses'] = unc_df['G'] - unc_df['W']
 years = duke_df['YEAR']
@@ -60,7 +60,7 @@ st.pyplot(fig1)
 
 # 4 dukes tournament progression - used chatGPT here
 
-st.header("Tournament Performance")
+st.header("Duke vs UNC Tournament Performance")
 mapping = {
     'R68': 1, 'R64': 2, 'R32': 3, 'S16': 4,
     'E8': 5, 'F4': 6, 'Championship Game': 7, 'Champions': 8
@@ -76,7 +76,7 @@ st.pyplot(fig4)
 
 # 5 uncs tournament performance
 
-st.header("Tournament Performance")
+st.header("Duke vs UNC Tournament Performance")
 mapping = {
     'R68': 1, 'R64': 2, 'R32': 3, 'S16': 4,
     'E8': 5, 'F4': 6, 'Championship Game': 7, 'Champions': 8
