@@ -50,9 +50,9 @@ years = duke_df['YEAR']
 bar_width = 0.3
 fig1, ax1 = plt.subplots()
 ax1.bar(years - bar_width / 2, duke_df['W'], width=bar_width, label='Duke', color='navy')
-ax1.bar(years - bar_width / 2, duke_df['Losses'], bottom=duke_df['W'], width=bar_width,label='duke losses', color='darkred')
+ax1.bar(years - bar_width / 2, duke_df['Losses'], bottom=duke_df['W'], width=bar_width,label='Duke Losses', color='darkred')
 ax1.bar(years + bar_width / 2, unc_df['W'], width=bar_width, label='UNC', color='lightblue')
-ax1.bar(years + bar_width / 2, unc_df['Losses'], bottom=unc_df['W'], width=bar_width,label='unc losses', color='crimson')
+ax1.bar(years + bar_width / 2, unc_df['Losses'], bottom=unc_df['W'], width=bar_width,label='UNC Losses', color='crimson')
 ax1.set(title="Duke vs UNC's Wins Season performance over Ten Years", xlabel="Year", ylabel="Wins")
 ax1.set_xticks(years)
 ax1.legend()
