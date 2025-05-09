@@ -41,7 +41,7 @@ p = np.poly1d(z)
 ax2.plot(unc_df['YEAR'], p(unc_df['YEAR']), color='lightblue', linestyle='--', label='Trendline')
 ax2.set(title="Duke vs UNC's Defensive Rating Over Ten Years", xlabel="Year", ylabel="ADJDE")
 st.pyplot(fig2)
-st.caption("This plot shows how Duke and UNC's defensive efficiency (ADJDE) has changed over the past decade, with lower values indicating better defense.")
+st.caption("This plot compares Duke and UNC's defensive efficiency (ADJDE) has changed over the past decade, with lower values indicating better defense.")
 
 # 3 dukes vs unc overall season performance
 
