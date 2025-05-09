@@ -61,36 +61,35 @@ ax3.legend()
 st.pyplot(fig3)
 st.caption("This bar chart shows the number of wins and losses in each season for Duke and UNC, highlighting each team's overall regular season success.")
 
-# 4 dukes tournament progression - used chatGPT here
+# 4 and 5 duke and unc playoff performance - used chatGPT here
 
-st.header("Duke's Tournament Performance")
+st.header("Duke vs UNC's NCAA Tournament Performance")
+
+choice = st.radio("Select a team to view their NCAA Tournament performance:", ("Duke", "UNC"))
+
 mapping = {
     'R68': 1, 'R64': 2, 'R32': 3, 'S16': 4,
     'E8': 5, 'F4': 6, 'Championship Game': 7, 'Champions': 8
 }
-tourney = duke_df[duke_df['POSTSEASON'].notna()][['YEAR', 'POSTSEASON']].copy()
-tourney['Stage'] = tourney['POSTSEASON'].map(mapping)
-fig4, ax4 = plt.subplots()
-ax4.bar(tourney['YEAR'], tourney['Stage'], color='navy')
-ax4.set(title="Duke's Tournament Progression Over Ten Years", xlabel="Year", ylabel="Round Reached")
-ax4.set_yticks(list(mapping.values()))
-ax4.set_yticklabels(list(mapping.keys()))
-st.pyplot(fig4)
-st.caption("This bar chart displays how far Duke progressed in the NCAA Tournament each year, from early rounds to championship appearances.")
 
-# 5 uncs tournament performance
+if choice == "Duke":
+    tourney = duke_df[duke_df['POSTSEASON'].notna()][['YEAR', 'POSTSEASON']].copy()
+    tourney['Stage'] = tourney['POSTSEASON'].map(mapping)
+    fig, ax = plt.subplots()
+    ax.bar(tourney['YEAR'], tourney['Stage'], color='navy')
+    ax.set(title="Duke's Tournament Progression Over Ten Years", xlabel="Year", ylabel="Round Reached")
+    ax.set_yticks(list(mapping.values()))
+    ax.set_yticklabels(list(mapping.keys()))
+    st.pyplot(fig)
+    st.caption("This bar chart displays how far Duke progressed in the NCAA Tournament each year, from early rounds to championship appearances.")
 
-st.header("UNC's Tournament Performance")
-mapping = {
-    'R68': 1, 'R64': 2, 'R32': 3, 'S16': 4,
-    'E8': 5, 'F4': 6, 'Championship Game': 7, 'Champions': 8
-}
-tourney = unc_df[unc_df['POSTSEASON'].notna()][['YEAR', 'POSTSEASON']].copy()
-tourney['Stage'] = tourney['POSTSEASON'].map(mapping)
-fig5, ax5 = plt.subplots()
-ax5.bar(tourney['YEAR'], tourney['Stage'], color='lightblue')
-ax5.set(title="UNC's Tournament Progression Over Ten Years", xlabel="Year", ylabel="Round Reached")
-ax5.set_yticks(list(mapping.values()))
-ax5.set_yticklabels(list(mapping.keys()))
-st.pyplot(fig5)
-st.caption("This chart mirrors Duke's, showing UNC's progression through the NCAA Tournament over the last decade.")
+else:
+    tourney = unc_df[unc_df['POSTSEASON'].notna()][['YEAR', 'POSTSEASON']].copy()
+    tourney['Stage'] = tourney['POSTSEASON'].map(mapping)
+    fig, ax = plt.subplots()
+    ax.bar(tourney['YEAR'], tourney['Stage'], color='lightblue')
+    ax.set(title="UNC's Tournament Progression Over Ten Years", xlabel="Year", ylabel="Round Reached")
+    ax.set_yticks(list(mapping.values()))
+    ax.set_yticklabels(list(mapping.keys()))
+    st.pyplot(fig)
+    st.caption("This chart mirrors Duke's, showing UNC's progression through the NCAA Tournament over the last decade.")
