@@ -25,7 +25,7 @@ p = np.poly1d(z)
 ax1.plot(unc_df['YEAR'], p(unc_df['YEAR']), color='lightblue', linestyle='--', label='Trendline')
 ax1.set(title="Duke vs UNC's Offensive Rating Over Ten Years", xlabel="Year", ylabel="ADJOE")
 st.pyplot(fig1)
-st.caption("This scatterplot compares Duke and UNC's offensive efficiency (ADJOE) over the last ten years, with trendlines indicating overall performance trends.")
+st.caption("This plot compares Duke and UNC's offensive efficiency (ADJOE) over the last ten years, with higher values indicating better offense.")
 
 # 2 Duke vs UNC defensive effeciency
 
@@ -41,7 +41,7 @@ p = np.poly1d(z)
 ax2.plot(unc_df['YEAR'], p(unc_df['YEAR']), color='lightblue', linestyle='--', label='Trendline')
 ax2.set(title="Duke vs UNC's Defensive Rating Over Ten Years", xlabel="Year", ylabel="ADJDE")
 st.pyplot(fig2)
-st.caption("This plot compares Duke and UNC's defensive efficiency (ADJDE) has changed over the past decade, with lower values indicating better defense.")
+st.caption("This plot compares Duke and UNC's defensive efficiency (ADJDE) over the past decade, with lower values indicating better defense.")
 
 # 3 dukes vs unc overall season performance
 
@@ -59,7 +59,7 @@ ax3.set(title="Duke vs UNC's Wins Season performance over Ten Years", xlabel="Ye
 ax3.set_xticks(years)
 ax3.legend()
 st.pyplot(fig3)
-st.caption("This bar chart shows the number of wins and losses each season for Duke and UNC, highlighting each team's overall regular season success.")
+st.caption("This bar chart shows the number of wins and losses in each season for Duke and UNC, highlighting each team's overall regular season success.")
 
 # 4 dukes tournament progression - used chatGPT here
 
